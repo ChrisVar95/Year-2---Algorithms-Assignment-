@@ -101,6 +101,7 @@ class Heap
 class UnionFindSets
 {
     private int[] treeParent;
+    private int[] rank;
     private int N;
     
     public UnionFindSets( int V)
@@ -108,9 +109,11 @@ class UnionFindSets
         
         N = V;
         treeParent = new int[V+1];
+        rank = new int[V+1];
 
         for(int i = 0; i < V; i++) { 
             treeParent[i] = i;  //vertexes are in seperate sets
+            rank[i] = 0;
         }
     }
 
@@ -131,11 +134,25 @@ class UnionFindSets
             }
         }
     }
+
+    public void unionByRank(int set1, int set2){
+        int u = findSet(set1);
+        int v = findSet(set2);
+
+        if (rank[u] < rank[v]){
+            treeParent[u] = v;
+        } else if (rank[u] > rank[v]){
+            treeParent[v] = u;
+        } else {
+            treeParent[v] = u;
+            rank[u]++;
+        }
+    }
     
     public void showTrees()
     {
         int i;
-        for(i=0; i<N; ++i)
+        for(i=1; i<=N; ++i)
             System.out.print(toChar(i) + "->" + toChar(treeParent[i]) + "  " );
         System.out.print("\n");
     }
@@ -144,7 +161,7 @@ class UnionFindSets
     {
         int u, root;
         int[] shown = new int[N+1];
-        for (u=0; u<N; ++u)
+        for (u=1; u<=N; ++u)
         {   
             root = findSet(u);
             if(shown[root] != 1) {
@@ -247,15 +264,15 @@ class Graph
             uSet =  partition.findSet(e.u);
             vSet = partition.findSet(e.v);
             if(uSet != vSet){
-                partition.union(uSet, vSet);
+                partition.unionByRank(uSet, vSet);
                 System.out.print("Inserting egde to MST: ");
                 e.show();
                 mst[i++] = e;
             }
             
+            //partition.showSets();
+            partition.showTrees();
         }
-        partition.showTrees();
-        partition.showSets();
         return mst;
     }
 
