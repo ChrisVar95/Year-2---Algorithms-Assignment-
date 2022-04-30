@@ -18,8 +18,8 @@ class GraphLists{}
     ********************
     Methods
     ********************
-    DF()
-    BF()
+    DF() - Depth First Graph traversal
+    BF() - Breadth First Graph traversal
     MST_Prim()
     * Adds adj list into heap
         dist = new int[V + 1];      // to record the current distance of a vertex from the MST.
@@ -94,6 +94,7 @@ class GraphLists {
         String line = reader.readLine();        
         String[] parts = line.split(splits);
         System.out.println("Parts[] = " + parts[0] + " " + parts[1]);
+        reader.close();
 
         V = Integer.parseInt(parts[0]);
         E = Integer.parseInt(parts[1]);
@@ -123,8 +124,7 @@ class GraphLists {
             t = new Node(); t.vert = v; t.wgt = wgt; t.next = adj[u]; adj[u] = t;
 
             t = new Node(); t.vert = u; t.wgt = wgt; t.next = adj[v]; adj[v] = t;    
-
-        }          
+        }      
     }
 
     // converts vertex into char for pretty printing
