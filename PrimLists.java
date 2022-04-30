@@ -94,20 +94,19 @@ class GraphLists {
         String line = reader.readLine();        
         String[] parts = line.split(splits);
         System.out.println("Parts[] = " + parts[0] + " " + parts[1]);
-        reader.close();
-
+        
         V = Integer.parseInt(parts[0]);
         E = Integer.parseInt(parts[1]);
-
+        
         // create sentinel node
         z = new Node(); 
         z.next = z;
-
+        
         // create adjacency lists, initialised to sentinel node z       
         adj = new Node[V+1];        
         for(v = 1; v <= V; ++v)
-            adj[v] = z;               
-
+        adj[v] = z;               
+        
        // read the edges
         System.out.println("Reading edges from text file");
         for(e = 1; e <= E; ++e)
@@ -117,14 +116,15 @@ class GraphLists {
             u = Integer.parseInt(parts[0]);
             v = Integer.parseInt(parts[1]); 
             wgt = Integer.parseInt(parts[2]);
-
+            
             System.out.println("Edge " + toChar(u) + "--(" + wgt + ")--" + toChar(v));    
-
+            
             // write code to put edge into adjacency matrix 
             t = new Node(); t.vert = v; t.wgt = wgt; t.next = adj[u]; adj[u] = t;
-
+            
             t = new Node(); t.vert = u; t.wgt = wgt; t.next = adj[v]; adj[v] = t;    
         }      
+        reader.close();
     }
 
     // converts vertex into char for pretty printing

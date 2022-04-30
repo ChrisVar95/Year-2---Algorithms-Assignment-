@@ -214,7 +214,7 @@ class Graph
         // create edge array
         edge = new Edge[E+1];   
         
-       // read the edges
+        // read the edges
         System.out.println("Reading edges from text file");
         for(e = 1; e <= E; ++e)
         {
@@ -225,9 +225,10 @@ class Graph
             w = Integer.parseInt(parts[2]);
             
             System.out.println("Edge " + toChar(u) + "--(" + w + ")--" + toChar(v));                         
-             
+            
             edge[e] = new Edge(u, v, w); // create Edge object  
         }
+        reader.close();
     }
 
 
@@ -238,7 +239,7 @@ class Graph
 **********************************************************/
     public Edge[] MST_Kruskal() 
     {
-        int ei, i = 0;
+        int i = 0;
         Edge e;
         int uSet, vSet; //set1 and set2
         UnionFindSets partition;
@@ -270,7 +271,7 @@ class Graph
                 mst[i++] = e;
             }
             
-            //partition.showSets();
+            partition.showSets();
             partition.showTrees();
         }
         return mst;
