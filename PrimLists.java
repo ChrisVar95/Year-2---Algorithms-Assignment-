@@ -1,4 +1,7 @@
 /*
+Prim's Minimum Spanning Tree Algorithm
+Graph Traversal
+
 public class PrimLists{}
 * Runs the code
     * Throws IOException if file not found
@@ -105,7 +108,7 @@ class GraphLists {
         // create adjacency lists, initialised to sentinel node z       
         adj = new Node[V+1];        
         for(v = 1; v <= V; ++v)
-        adj[v] = z;               
+            adj[v] = z;               
         
        // read the edges
         System.out.println("Reading edges from text file");
